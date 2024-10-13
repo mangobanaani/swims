@@ -12,7 +12,6 @@ const Home = () => {
   const [waterPh, setWaterPh] = useState<number>(7.5); // Initial water pH level
   const [conductivity, setConductivity] = useState<number>(1.2); // Initial conductivity in mS/cm
   const [airPressure, setAirPressure] = useState<number>(1013); // Initial air pressure in hPa
-  const [timeOfDay, setTimeOfDay] = useState<string>('12:00 PM'); // Initial time of day
   const [depth, setDepth] = useState<number>(10); // Initial depth in meters
   const [pingTime, setPingTime] = useState<number>(0); // Initial ping return time in milliseconds
 
@@ -33,9 +32,6 @@ const Home = () => {
       setWaterPh((prev) => Math.round((prev + (Math.random() * 0.05 - 0.025)) * 10) / 10);
       setConductivity((prev) => Math.round((prev + (Math.random() * 0.05 - 0.025)) * 10) / 10);
       setAirPressure((prev) => Math.round((prev + (Math.random() * 0.5 - 0.25)) * 10) / 10);
-      const hours = new Date().getHours();
-      const minutes = new Date().getMinutes();
-      setTimeOfDay(`${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes} ${hours >= 12 ? 'PM' : 'AM'}`);
       updateDepth(seaLevel);
       setPingTime(parseFloat(calculatePingTime(depth).toFixed(2))); // Calculate and set ping time
     }, 1000);
